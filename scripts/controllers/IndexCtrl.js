@@ -1,4 +1,14 @@
-angular.module("ejemploApp").controller("IndexCtrl",["$scope","$http",function($scope,$http){
-	debugger;
+angular.module("ejemploApp").controller("IndexCtrl",["$scope",function($scope){
+
+
+	$scope.haciaAbajo=function(){
+			$scope.$broadcast("EventoHaciaAbajo","broadcast");
+	}
+
+
+	$scope.$on("EventoHaciaArriba",function(event,datos){
+		alert(datos);
+	});
 
 }]);
+
