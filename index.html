@@ -10,6 +10,8 @@
 	<script type="text/javascript" src="vendor/angular-route-segment.min.js"></script>
 	<script type="text/javascript" src="scripts/app.js"></script>
 	<script type="text/javascript" src="scripts/controllers/PeliculasCtrl.js"></script>
+		<script type="text/javascript" src="scripts/controllers/NavigationCtrl.js"></script>
+
 	<script type="text/javascript" src="scripts/controllers/SeriesCtrl.js"></script>
 </head>
 
@@ -18,10 +20,11 @@
 		<header>
 			<h1>Películas y series</h1>
 		</header>
-		<nav>
+		<nav ng-controller="NavigationCtrl">
 			<ul class="nav nav-tabs">
-			  <li><a href="#/peliculas">Películas</a></li>
-			  <li><a href="#/series">Series</a></li>
+				<!--funcion coge el root y que lo comprueba y lo pone active-->
+			  <li ng-class="{'active':rutaEsPeliculas()}"><a href="#/peliculas">Películas</a></li>
+			  <li ng-class="{'active':rutaEsSeries()}"><a href="#/series">Series</a></li>
 			</ul>
 		</nav>
 
