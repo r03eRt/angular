@@ -1,1 +1,9 @@
-<h4>Películas</h4>
+<nav >
+	<ul class="nav nav-tabs">
+		<!--funcion coge el root y que lo comprueba y lo pone active-->
+	  <li ng-class="{'active':rutaEsProximamente()}"><a href="#/peliculas/proximamente">Proximamente</a></li>
+	  <li ng-class="{'active':rutaEsCartelera()}"><a href="#/peliculas/cartelera">Cartelera</a></li>
+	</ul>
+</nav>
+
+<section app-view-segment="1"></section>
