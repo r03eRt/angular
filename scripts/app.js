@@ -19,7 +19,17 @@ angular.module("ejemploApp").config(["$routeSegmentProvider",function($routeSegm
 	//usamos within para incluir el nivel mas abajo 
 	$routeSegmentProvider.within("peliculas").segment("proximamente",{
 		controller:"PeliculasProximamenteCtrl",
-		templateUrl:"views/PeliculasProximamente.html"
+		templateUrl:"views/PeliculasProximamente.html",
+		//Necesito controlador una url y las cosas que necesito,en este caso 
+		//necesito peliculas para pasarle la coleccion directamente al controlador
+		//con esto evitamos que se trabaje dentro del controlador
+		resolve:{
+			Peliculas:["ApiService",function(ApiService){
+				//resuelvo promesa
+				return ApiService.consultaApi("movie/upcoming");
+
+			}]
+		}
 	});
 
 	//usamos within para incluir el nivel mas abajo 
