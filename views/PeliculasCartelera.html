@@ -1,8 +1,11 @@
 <!--repite por cada pelicula en datos pelicuas-->
 <table class="table table-striped">
   <tbody>
-  	<tr ng-repeat="pelicula in peliculas">
+  	<tr ng-repeat="pelicula in peliculas | orderBy: 'title'">
   		<td>{{pelicula.title}}</td>
+  		<!--<td>{{pelicula.release_date | date:'dd/MM/yyyy'}}</td>-->
+  		<td>{{ pelicula.release_date | fechaEstreno }}</td>
+  		
   	</tr>
   </tbody>
 </table>
