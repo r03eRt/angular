@@ -1,6 +1,6 @@
 angular.module("ejemploApp",["ngRoute","route-segment","view-segment"]);
 
-angular.module("ejemploApp").config(["$routeSegmentProvider",function($routeSegmentProvider){
+angular.module("ejemploApp").config(["$routeSegmentProvider","$routeProvider",function($routeSegmentProvider,$routeProvider){
 	//rutas para cada ruta
 	//lo que tenga que ocurrir que pase en el segmento películas
 	$routeSegmentProvider.when("/peliculas","peliculas");
@@ -8,6 +8,12 @@ angular.module("ejemploApp").config(["$routeSegmentProvider",function($routeSegm
 	//otro nivel mas debajo
 	$routeSegmentProvider.when("/peliculas/proximamente","peliculas.proximamente");
 	$routeSegmentProvider.when("/peliculas/cartelera","peliculas.cartelera");
+	//por rute que no exista
+	$routeProvider.otherwise({
+		redirectTo:"/peliculas/proximamente/"
+	});
+
+	$routeSegmentProvider.when("/peliculas/detalles","peliculas.detalles");
 
 
 	//que quien lo tenga que ejecutar sean el controlador peliculasCtrl usando la vista Peliculas.html
@@ -28,6 +34,17 @@ angular.module("ejemploApp").config(["$routeSegmentProvider",function($routeSegm
 				//resuelvo promesa
 				return ApiService.consultaApi("movie/upcoming");
 
+			}]
+		}
+	});
+
+
+	$routeSegmentProvider.within("peliculas").segment("detalles",{
+		controller:"PeliculasDetallesCtrl",
+		templateUrl:"views/PeliculasDetalles.html",
+		resolve:{
+			Pelicula:["ApiService","$routeParams",function(ApiService,$routeParams){
+				return ApiService.consultaApi("movie/"+$routeParams.idPelicula);
 			}]
 		}
 	});
